@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
-
+import glob
 st.set_page_config(
     page_title="College Cost, Debt, and Earnings Dashboard",
     layout="wide"
@@ -14,7 +14,13 @@ st.write(
 )
 
 # Load data
-df = pd.read_csv("Master_Analytical_File_No_Empty_Data.csv")
+
+csv_files = glob.glob("*.csv")
+st.write("CSV files found:", csv_files)
+
+data_file = [file for file in csv_files if "Master" in file][0]
+
+df = pd.read_csv(data_file)
 
 # Clean column names
 df.columns = df.columns.str.strip()
