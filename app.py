@@ -14,7 +14,7 @@ st.write(
 )
 
 # Load data
-df = pd.read_csv("Master_Analytical_File_No_Empty_Data (3).csv")
+df = pd.read_csv("Master_Analytical_File_No_Empty_Data.csv")
 
 # Clean column names
 df.columns = df.columns.str.strip()
