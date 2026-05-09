@@ -167,7 +167,7 @@ fig5.update_layout(
     height=600
 )
 
-st.plotly_chart(fig5, use_container_width=True
+st.plotly_chart(fig5, use_container_width=True)
 
 # Top 10 schools
 st.subheader("Top 10 Institutions by Earnings 10 Years Out")
