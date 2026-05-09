@@ -148,17 +148,26 @@ with right_col:
 # Scatter plot
 st.subheader("Average Cost vs Earnings 10 Years Out")
 
+latest_year = filtered_df["Academic Year"].max()
+latest_df = filtered_df[filtered_df["Academic Year"] == latest_year]
+
 fig5 = px.scatter(
-    filtered_df,
+    latest_df,
     x="Average Cost",
     y="Earnings (10 Years Out)",
     color="Institution Type",
     hover_name="University Name",
     size="Median Debt",
-    title="Does Higher College Cost Lead to Higher Earnings?"
+    title=f"Average Cost vs Earnings 10 Years Out ({latest_year})"
 )
 
-st.plotly_chart(fig5, use_container_width=True)
+fig5.update_layout(
+    xaxis_title="Annual Average Cost ($)",
+    yaxis_title="Earnings 10 Years Out ($)",
+    height=600
+)
+
+st.plotly_chart(fig5, use_container_width=True
 
 # Top 10 schools
 st.subheader("Top 10 Institutions by Earnings 10 Years Out")
