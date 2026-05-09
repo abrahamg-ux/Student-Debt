@@ -102,6 +102,13 @@ fig2 = px.line(
     title="Average Earnings 10 Years Out Over Time"
 )
 
+fig2.update_layout(
+    yaxis_title="Average Earnings 10 Years Out ($)",
+    xaxis_title="Academic Year",
+    yaxis_tickprefix="$",
+    height=550
+)
+
 st.plotly_chart(fig2, use_container_width=True)
 
 # Two-column layout
