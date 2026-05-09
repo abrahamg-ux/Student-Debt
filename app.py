@@ -163,8 +163,14 @@ st.plotly_chart(fig5, use_container_width=True)
 # Top 10 schools
 st.subheader("Top 10 Institutions by Earnings 10 Years Out")
 
+# Use only the most recent academic year
+latest_year = filtered_df["Academic Year"].max()
+
+latest_df = filtered_df[filtered_df["Academic Year"] == latest_year]
+
 top_10 = (
-    filtered_df
+    latest_df
+    .dropna(subset=["Earnings (10 Years Out)"])
     .sort_values("Earnings (10 Years Out)", ascending=False)
     .head(10)
 )
@@ -175,13 +181,21 @@ fig6 = px.bar(
     y="University Name",
     color="Institution Type",
     orientation="h",
-    title="Top 10 Institutions by Earnings 10 Years Out"
+    title=f"Top 10 Institutions by Earnings 10 Years Out ({latest_year})",
+    text="Earnings (10 Years Out)"
 )
 
-fig6.update_layout(yaxis={"categoryorder": "total ascending"})
+fig6.update_traces(
+    texttemplate="$%{text:,.0f}",
+    textposition="outside"
+)
+
+fig6.update_layout(
+    yaxis={"categoryorder": "total ascending"},
+    xaxis_title="Earnings 10 Years Out",
+    yaxis_title="Institution",
+    height=600,
+    margin=dict(l=250, r=50, t=80, b=50)
+)
 
 st.plotly_chart(fig6, use_container_width=True)
-
-# Data preview
-st.subheader("Dataset Preview")
-st.dataframe(filtered_df.head(25))
